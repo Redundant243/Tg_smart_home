@@ -35,7 +35,7 @@ HELPTEXT = """
 /all_on - Включить все лампочки
 /all_off - Выключить все лампочки
 /show_all - Показать все лампочки
-/bright % - настройка яркости. Прим. /bright 100 - установить яркость 100%, если вызвать команду без аргумментов, то по умолчанию установит 100%
+/bright % - настройка яркости. Прим. /bright 100 - установить яркость 100%, если вызвать команду без аргумментов, то покажет клавиатуру с выбором
 /dif_on num- включить выбранную лампочку. Прим. /dif_on №num включить лампочку №num
 /dif_off num- выключить  выбранную лампочку. Прим. /dif_off №num вsключить лампочку №num
 /cute_blink - включить мигание на 15 секунд, полезно, чтобы показать знакомым насколько ваши лампочки "умные"
@@ -61,7 +61,6 @@ keyboard_brightness.add(KeyboardButton("0 %"), KeyboardButton("25 %"), KeyboardB
 
 storage = MemoryStorage()
 
-def logger
 
 @dp.message_handler(commands=['start'])
 async def start_handler(message: types.Message):
@@ -97,6 +96,11 @@ async def help_handler(message: types.Message):
 
 @dp.message_handler(commands="all_on")
 async def all_on_handler(message: types.Message):
+    user_id = message.from_user.id
+    user_full_name = message.from_user.full_name
+    user_username = message.from_user.username
+    logging.info(f'{time.asctime()} {user_id=} '
+                 f'{user_full_name=} {user_username=}\nmessage:"{message.text}" \n')
     my_bulbs = connection()
     try:
         all_on(my_bulbs)
@@ -109,6 +113,11 @@ async def all_on_handler(message: types.Message):
 
 @dp.message_handler(commands="all_off")
 async def all_off_handler(message: types.Message):
+    user_id = message.from_user.id
+    user_full_name = message.from_user.full_name
+    user_username = message.from_user.username
+    logging.info(f'{time.asctime()} {user_id=} '
+                 f'{user_full_name=} {user_username=}\nmessage:"{message.text}" \n')
     my_bulbs = connection()
     try:
         all_off(my_bulbs)
@@ -121,6 +130,11 @@ async def all_off_handler(message: types.Message):
 
 @dp.message_handler(commands="show_all")
 async def show_all_handler(message: types.Message):
+    user_id = message.from_user.id
+    user_full_name = message.from_user.full_name
+    user_username = message.from_user.username
+    logging.info(f'{time.asctime()} {user_id=} '
+                 f'{user_full_name=} {user_username=}\nmessage:"{message.text}" \n')
     my_bulbs = connection()
     try:
         bulbs = show_all(my_bulbs)
@@ -136,6 +150,11 @@ async def show_all_handler(message: types.Message):
 
 @dp.message_handler(commands="bright")
 async def bright_handler(message: types.Message):
+    user_id = message.from_user.id
+    user_full_name = message.from_user.full_name
+    user_username = message.from_user.username
+    logging.info(f'{time.asctime()} {user_id=} '
+                 f'{user_full_name=} {user_username=}\nmessage:"{message.text}" \n')
     my_bulbs = connection()
     args = message.text.split(sep=" ")
     if len(args) < 2:
@@ -158,6 +177,11 @@ async def bright_handler(message: types.Message):
 
 @dp.message_handler(state=Brightness.wait_for_brightness)
 async def bright_handler(message: types.Message, state: FSMContext):
+    user_id = message.from_user.id
+    user_full_name = message.from_user.full_name
+    user_username = message.from_user.username
+    logging.info(f'{time.asctime()} {user_id=} '
+                 f'{user_full_name=} {user_username=}\nmessage:"{message.text}" \n')
     my_bulbs = connection()
     args = message.text.split(sep=" ")
     try:
@@ -181,6 +205,11 @@ async def bright_handler(message: types.Message, state: FSMContext):
 
 @dp.message_handler(commands="dif_on")
 async def dif_on_handler(message: types.Message):
+    user_id = message.from_user.id
+    user_full_name = message.from_user.full_name
+    user_username = message.from_user.username
+    logging.info(f'{time.asctime()} {user_id=} '
+                 f'{user_full_name=} {user_username=}\nmessage:"{message.text}" \n')
     my_bulbs = connection()
     args = message.text.split(sep=" ")
     if len(args) < 2:
@@ -200,6 +229,11 @@ async def dif_on_handler(message: types.Message):
 
 @dp.message_handler(commands="dif_off")
 async def dif_off_handler(message: types.Message):
+    user_id = message.from_user.id
+    user_full_name = message.from_user.full_name
+    user_username = message.from_user.username
+    logging.info(f'{time.asctime()} {user_id=} '
+                 f'{user_full_name=} {user_username=}\nmessage:"{message.text}" \n')
     my_bulbs = connection()
     args = message.text.split(sep=" ")
     if len(args) < 2:
@@ -219,6 +253,11 @@ async def dif_off_handler(message: types.Message):
 
 @dp.message_handler(commands="cute_blink")
 async def cute_handler(message: types.Message):
+    user_id = message.from_user.id
+    user_full_name = message.from_user.full_name
+    user_username = message.from_user.username
+    logging.info(f'{time.asctime()} {user_id=} '
+                 f'{user_full_name=} {user_username=}\nmessage:"{message.text}" \n')
     my_bulbs = connection()
     try:
         set_mode(my_bulbs)
@@ -238,6 +277,11 @@ async def smart_func(state: FSMContext):
 
 @dp.message_handler(commands="very_smart")
 async def very_smart_handler(message: types.Message, state: FSMContext):
+    user_id = message.from_user.id
+    user_full_name = message.from_user.full_name
+    user_username = message.from_user.username
+    logging.info(f'{time.asctime()} {user_id=} '
+                 f'{user_full_name=} {user_username=}\nmessage:"{message.text}" \n')
     my_bulbs = connection()
     try:
         if is_all_off(my_bulbs):
