@@ -13,8 +13,15 @@ def is_all_off(my_bulbs):
     else:
         return True
 
+
 def connection():
-    my_bulbs = discover_bulbs()
+    try:
+        my_bulbs = discover_bulbs()
+        if len(my_bulbs) == 0:
+            raise Exception("Can't connect")
+    except Exception as e:
+        print(e)
+        return e
     while len(my_bulbs) != 2:
         my_bulbs = discover_bulbs()
         time.sleep(1)
@@ -70,4 +77,3 @@ def set_mode(my_bulbs):
         time.sleep(0.5)
         bulb1.turn_on()
         bulb2.turn_on()
-
